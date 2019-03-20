@@ -1,4 +1,4 @@
-function FEM_1D_TUT
+function FEM_1D_EL
     close all; clc;
     
     %% Define No. of elements/nodes
