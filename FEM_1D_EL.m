@@ -45,7 +45,7 @@ function FEM_1D_EL
     fprintf(repmat('\n (%d)\t\t %2.6e\n', 1, node.N), node.tbl); fprintf('\n\n');
    
     figure, 
-    subplot(2,1,1), plotCMAP([gbl.y', node.disp, node.disp]); grid on;
+    subplot(2,1,1), pltSurf1([gbl.y', node.disp, node.disp]); grid on;
     %set(gca, 'xticklabel', ''); % Turn off x-axis tick labels
     ylabel('Nodal Disp. (in)');
     
@@ -58,25 +58,6 @@ function FEM_1D_EL
     fprintf(repmat('\n (%d)\t\t %2.6e\n', 1, element.N), element.tbl); fprintf('\n\n');
     
     subplot(2,1,2), 
-    plotCMAP([linspace(0,element.L*element.N, element.N)', element.stress, element.stress]); 
+    pltSurf1([linspace(0,element.L*element.N, element.N)', element.stress, element.stress]); 
     grid on; xlabel('y-position (in)'); ylabel('Stress (lb*in^2)');
     
-    function plotCMAP(data)
-
-        x = data(:,1) ; %// extract "X" column
-        y = data(:,2) ; %// same for "Y"
-        c = data(:,3) ; %// extract color index for the custom colormap
-
-        %% // Prepare matrix data
-        xx = [x x];           %// create a 2D matrix based on "X" column
-        yy = [y y];           %// same for Y
-        zz = zeros(size(xx)); %// everything in the Z=0 plane
-        cc = [c c] ;         %// matrix for "CData"
-
-        %// draw the surface (actually a line)
-        hs = surf(xx,yy,zz,cc,'EdgeColor','interp','FaceColor','none','Marker','o') ;
-
-        colormap('jet') ;     %// assign the colormap
-        shading flat                    %// so each line segment has a plain color
-        view(2) %// view(0,90)          %// set view in X-Y plane
-        colorbar
