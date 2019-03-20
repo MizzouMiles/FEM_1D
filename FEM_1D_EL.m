@@ -45,7 +45,7 @@ function FEM_1D_EL
     fprintf(repmat('\n (%d)\t\t %2.6e\n', 1, node.N), node.tbl); fprintf('\n\n');
    
     figure, 
-    subplot(2,1,1), pltSurf1([gbl.y', node.disp, node.disp]); grid on;
+    subplot(2,1,1), pltSurf1(gbl.y', node.disp, node.disp); grid on;
     %set(gca, 'xticklabel', ''); % Turn off x-axis tick labels
     ylabel('Nodal Disp. (in)');
     
@@ -58,6 +58,6 @@ function FEM_1D_EL
     fprintf(repmat('\n (%d)\t\t %2.6e\n', 1, element.N), element.tbl); fprintf('\n\n');
     
     subplot(2,1,2), 
-    pltSurf1([linspace(0,element.L*element.N, element.N)', element.stress, element.stress]); 
+    pltSurf1(linspace(0,element.L*element.N, element.N)', element.stress, element.stress); 
     grid on; xlabel('y-position (in)'); ylabel('Stress (lb*in^2)');
     
